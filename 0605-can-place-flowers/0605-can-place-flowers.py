@@ -1,5 +1,4 @@
 class Solution:
-    import math
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
         ableToPlantCounter = 0
         prev = 0
