@@ -1,12 +1,19 @@
 class Solution:
     import math
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
-        if n == 0:
-            return True
-        for i in range(len(flowerbed)):
-            if flowerbed[i] == 0 and (i == 0 or flowerbed[i-1] == 0) and (i == len(flowerbed)-1 or flowerbed[i+1] == 0):
-                flowerbed[i] = 1
-                n -= 1
-                if n == 0:
-                    return True
-        return False
+        count, prev = 0, 0
+
+        for cur in flowerbed:
+            if cur == 1:
+                if prev == 1: # violation!
+                    count -= 1
+                prev = 1
+            else:
+                if prev == 1: # can't plant
+                    prev = 0 
+                else:
+                    count += 1
+                    prev = 1 # the cur plot gets taken
+            
+        return count >= n
+
